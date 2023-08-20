@@ -5,6 +5,8 @@ extends Node
 var _host : String = 'ws://%s:%s' % [URL, PORT]
 var _client = WebSocketPeer.new()
 
+signal receive_str(txt)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var err = _client.connect_to_url(_host)
@@ -14,7 +16,7 @@ func _ready():
 		var _port = _client.get_connected_port()
 		print('Connected Succefuly on PORT: %s' % _port)
 		print('ws://%s:%s' % [_client.get_connected_host(), _port])
-	send_msg('')
+#	send_msg('')
 #	receive_data()
 	
 
@@ -37,9 +39,21 @@ func _process(delta):
 
 func receive_data(pac):
 	var payload = _client.get_packet()
-	print('Got message: %s' % pac.get_string_from_ascii())
-	send_msg('msg')
+	var txt = pac.get_string_from_ascii()
+	print('Got message: %s' % txt)
+	$Control/Panel/VBoxContainer/RichTextLabel.append_text(txt+'\n')
+#	emit_signal(txt)
+#	send_msg('msg')
 
 
 func send_msg(msg):
-	_client.put_packet('Selva porra!'.to_ascii_buffer())
+	_client.put_packet(msg.to_ascii_buffer())
+
+
+func _on_button_button_up():
+	var line = $Control/Panel/VBoxContainer/HBoxContainer/LineEdit.text
+	send_msg(line)
+
+
+func _on_line_edit_text_submitted(new_text):
+	send_msg(new_text)

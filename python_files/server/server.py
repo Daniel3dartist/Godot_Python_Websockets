@@ -1,14 +1,17 @@
+import sys
 import asyncio
 from websockets.server import serve
+from generator import Gen
 import json
 
 async def echo(websocket):
     print('foi?')
     print(websocket)
-    await websocket.send('Pacote enviado!')
     async for msg in websocket:
         data = msg.decode('ascii', 'strict')
+        txt = Gen.creator(data, 80, False)
         print('Data: ', data)
+        await websocket.send(txt.encode('ascii', 'strict'))
 
 async def main():
     async with serve(echo, "localhost", 8080):
