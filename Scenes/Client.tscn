@@ -1,7 +1,75 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct2rh6q7ees63"]
+[gd_scene load_steps=15 format=3 uid="uid://ct2rh6q7ees63"]
 
 [ext_resource type="Script" path="res://scripts/client.gd" id="1_dvy2v"]
 [ext_resource type="Script" path="res://scripts/Control.gd" id="2_xekt2"]
+[ext_resource type="Texture2D" uid="uid://b7jbyxn7jkxam" path="res://assets/direction-corner-top-right-icon-White.png" id="3_h3511"]
+[ext_resource type="Texture2D" uid="uid://c0ec4xrhlg8b1" path="res://assets/mic_ico.png" id="3_t0tbr"]
+[ext_resource type="Script" path="res://scripts/Input_HBoxContainer.gd" id="3_yhds6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acrqy"]
+bg_color = Color(0.12549, 0.141176, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fb4q"]
+content_margin_left = 25.0
+content_margin_right = 25.0
+bg_color = Color(0.333333, 0.396078, 0.501961, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8p22p"]
+bg_color = Color(0.298039, 0.313726, 0.560784, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taqxe"]
+bg_color = Color(0.321569, 0.584314, 0.682353, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg715"]
+bg_color = Color(0.337255, 0.345098, 0.462745, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.482353, 0.952941, 0.992157, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqcrb"]
+bg_color = Color(0.894118, 0.329412, 0.301961, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5do8i"]
+bg_color = Color(0.894118, 0.329412, 0.301961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.941176, 0.576471, 0.184314, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbyb3"]
+bg_color = Color(0.2, 0.227451, 0.309804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc1qf"]
+bg_color = Color(0.172549, 0.32549, 0.572549, 1)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_dvy2v")
@@ -22,6 +90,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_acrqy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
 layout_mode = 1
@@ -31,29 +101,153 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Container" type="Container" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 scroll_following = true
 tab_size = 24
 text_direction = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer"]
+[node name="Input_HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_yhds6")
+
+[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_2fb4q")
+placeholder_text = "Type here...."
+
+[node name="Send_Button" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8p22p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_taqxe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bg715")
+icon = ExtResource("3_h3511")
+icon_alignment = 1
+
+[node name="Mic_Button" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer"]
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8p22p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fqcrb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5do8i")
+icon = ExtResource("3_t0tbr")
+icon_alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbyb3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Model"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "gpt2-medium"
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Max Lenght"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+min_value = 10.0
+max_value = 50000.0
+value = 25.0
+alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="Control/Panel/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Sample"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Container" type="Container" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer3/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Control/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
+[node name="CheckButton" type="CheckButton" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer3/HBoxContainer"]
 layout_mode = 2
-text = "^"
+alignment = 1
+icon_alignment = 1
+
+[node name="Container2" type="Container" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="Control/Panel/VBoxContainer/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CC" type="Label" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fc1qf")
+text = "MIT License - Copyright (c) 2023 Daniel Bento Sobrinho"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="receive_str" from="." to="Control" method="_on_node_receive_str"]
-[connection signal="text_submitted" from="Control/Panel/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="text_submitted" from="Control/Panel/VBoxContainer/HBoxContainer/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
-[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_up"]
-[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/Button" to="Control" method="_on_button_button_up"]
+[connection signal="gui_input" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/RichTextLabel" to="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer" method="_on_rich_text_label_gui_input"]
+[connection signal="focus_entered" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/LineEdit" to="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer" method="_on_line_edit_focus_entered"]
+[connection signal="focus_exited" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/LineEdit" to="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer" method="_on_line_edit_focus_exited"]
+[connection signal="text_submitted" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/Send_Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/Send_Button" to="Control" method="_on_button_button_up"]
+[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/Mic_Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/Input_HBoxContainer/Mic_Button" to="Control" method="_on_button_button_up"]

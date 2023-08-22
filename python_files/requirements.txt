@@ -1,6 +1,5 @@
 asyncio==3.4.3
 websockets==11.0.3
-
 nltk==3.8.1
 numpy==1.24.2
 pycaption== 2.1.1
@@ -8,3 +7,4 @@ torch==2.0.1
 torchvision==0.15.2
 torchaudio===2.0.2 -f https://download.pytorch.org/whl/torch_stable.html
 transformers
+xformers

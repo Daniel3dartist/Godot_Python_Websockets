@@ -5,11 +5,11 @@ from generator import Gen
 import json
 
 async def echo(websocket):
-    print('foi?')
-    print(websocket)
     async for msg in websocket:
         data = msg.decode('ascii', 'strict')
-        txt = Gen.creator(data, 80, False)
+        data = json.loads(data)
+        Gen.set_model(data['model'])
+        txt = Gen.creator(data['input'], data['leng'], data['sample'])
         print('Data: ', data)
         await websocket.send(txt.encode('ascii', 'strict'))
 
