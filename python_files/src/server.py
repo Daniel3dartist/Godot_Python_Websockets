@@ -5,11 +5,15 @@ from generator import Gen
 import json
 
 async def echo(websocket):
+    gen = Gen()
     async for msg in websocket:
         data = msg.decode('ascii', 'strict')
         data = json.loads(data)
-        Gen.set_model(data['model'])
-        txt = Gen.creator(data['input'], data['leng'], data['sample'])
+        if data["model"] != None:
+            gen.set_model(mdl=str(data['model']))
+        else:
+            gen.set_model()
+        txt = gen.creator(data['input'], data['leng'], data['sample'])
         print('Data: ', data)
         await websocket.send(txt.encode('ascii', 'strict'))
 
