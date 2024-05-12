@@ -1,4 +1,4 @@
-# Godot_Python_Websockets
+# Godot Python Websockets
 This project is a demo of how to use websockets to communicate between gdscript and python. In the example we use GPT-2 to generate responses based on the input received by the application.
 
 
