@@ -15,7 +15,10 @@ async def echo(websocket):
             gen.set_model()
         txt = gen.creator(data['input'], data['leng'], data['sample'])
         print('Data: ', data)
-        await websocket.send(txt.encode('ascii', 'strict'))
+        try:
+            await websocket.send(txt.replace("\n\n", "\n").encode('ascii', 'strict'))      
+        except:
+            await websocket.send("[ERRO] Can't created the text!".encode('ascii', 'strict'))
 
 async def main():
     async with serve(echo, "localhost", 8080):

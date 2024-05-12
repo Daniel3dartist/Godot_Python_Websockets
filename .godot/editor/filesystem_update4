@@ -1,1 +1,3 @@
 res://Scenes/Client.tscn
+res://scripts/Control.gd
+res://scripts/client.gd

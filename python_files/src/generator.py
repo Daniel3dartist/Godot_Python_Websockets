@@ -4,7 +4,6 @@ from typing import Type
 class Gen:
     def __init__(self):
         self.generator = pipeline('text-generation', model="gpt2-medium")
-# generator = pipeline('text-generation', model="gpt2")#'EleutherAI/gpt-neo-2.7B')
     def set_model(self, mdl:str="gpt2-medium"):
         self.generator = pipeline('text-generation', model=mdl)
 

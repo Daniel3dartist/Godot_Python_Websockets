@@ -38,10 +38,12 @@ func _process(delta):
 		pass
 
 func receive_data(pac):
+	var _bot = '[color=aqua]Godette:[/color] '
+	var chat = $Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/RichTextLabel
 	var payload = _client.get_packet()
 	var txt = pac.get_string_from_ascii()
 	print('Got message: %s' % txt)
-	$Control/Panel/VBoxContainer/HBoxContainer/VBoxContainer/RichTextLabel.append_text('Godette: '+txt+'\n')
+	chat.append_text(_bot+txt+'\n')
 #	emit_signal(txt)
 #	send_msg('msg')
 
